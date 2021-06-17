@@ -12,13 +12,13 @@ int main()
 	{
 		string imgName1;
 		string imgName2;
-		cout << "µÚÒ»ÕÅÍ¼Æ¬±àºÅ: ";
+		cout << "ç¬¬ä¸€å¼ å›¾ç‰‡ç¼–å·: ";
 		cin >> imgName1;
-		cout << "µÚ¶şÕÅÍ¼Æ¬±àºÅ: ";
+		cout << "ç¬¬äºŒå¼ å›¾ç‰‡ç¼–å·: ";
 		cin >> imgName2;
 		stringstream ss1, ss2;
-		ss1 << "D:\\ÊĞÖ¾Êı¾İ\\¶«Î÷ºşÇøÖ¾£¨ÉÏ¾í£©-RH\\visualized\\" << imgName1 << ".visualized.jpg";
-		ss2 << "D:\\ÊĞÖ¾Êı¾İ\\¶«Î÷ºşÇøÖ¾£¨ÉÏ¾í£©-RH\\visualized\\" << imgName2 << ".visualized.jpg";
+		ss1 << "D:\\å¸‚å¿—æ•°æ®\\ä¸œè¥¿æ¹–åŒºå¿—ï¼ˆä¸Šå·ï¼‰-RH\\visualized\\" << imgName1 << ".visualized.jpg";
+		ss2 << "D:\\å¸‚å¿—æ•°æ®\\ä¸œè¥¿æ¹–åŒºå¿—ï¼ˆä¸Šå·ï¼‰-RH\\visualized\\" << imgName2 << ".visualized.jpg";
 		cout << ss1.str() << endl << ss2.str() << endl;
 
 		Mat srcImage1 = imread(ss1.str(), 0);
@@ -26,18 +26,18 @@ int main()
 
 		if (srcImage1.empty())
 		{
-			std::cout << "Í¼Ïñ1¼ÓÔØÊ§°Ü£¡" << std::endl;
+			std::cout << "å›¾åƒ1åŠ è½½å¤±è´¥ï¼" << std::endl;
 			system("pause");
 			return -1;
 		}
 		if (srcImage2.empty())
 		{
-			std::cout << "Í¼Ïñ2¼ÓÔØÊ§°Ü£¡" << std::endl;
+			std::cout << "å›¾åƒ2åŠ è½½å¤±è´¥ï¼" << std::endl;
 			system("pause");
 			return -1;
 		}
 
-		/*   ×ÔÊÊÓ¦ãĞÖµ»¯
+		/*   è‡ªé€‚åº”é˜ˆå€¼åŒ–
 		Mat srcImage1Thr;
 		adaptiveThreshold(srcImage1, srcImage1Thr, 255, CV_ADAPTIVE_THRESH_MEAN_C, CV_THRESH_BINARY, 25, 10);
 		Mat srcImage2Thr;
@@ -51,7 +51,7 @@ int main()
 		Mat hi2_clone = srcImage2.clone();
 
 
-		//¼ÆËãÖ±·½Í¼ËùĞè²ÎÊı
+		//è®¡ç®—ç›´æ–¹å›¾æ‰€éœ€å‚æ•°
 		MatND dstHist1, dstHist2;
 		int dims = 1;
 		float hranges[] = { 0, 255 };
@@ -59,7 +59,7 @@ int main()
 		int size = 256;
 		int channels = 0;
 
-		//¼ÆËãµÚÒ»ÕÅÍ¼ÏñµÄÖ±·½Í¼²¢¹éÒ»»¯
+		//è®¡ç®—ç¬¬ä¸€å¼ å›¾åƒçš„ç›´æ–¹å›¾å¹¶å½’ä¸€åŒ–
 		calcHist(&hi1_clone, 1, &channels, Mat(), dstHist1, dims, &size, ranges);
 		double  count1 = 0;
 		for (int i = 0; i < 160; i++)
@@ -68,7 +68,7 @@ int main()
 		}
 		normalize(dstHist1, dstHist1, 0, 1, NORM_MINMAX, -1, Mat());
 
-		//¼ÆËãµÚ¶şÕÅÍ¼ÏñµÄÖ±·½Í¼²¢¹éÒ»»¯
+		//è®¡ç®—ç¬¬äºŒå¼ å›¾åƒçš„ç›´æ–¹å›¾å¹¶å½’ä¸€åŒ–
 		calcHist(&hi2_clone, 1, &channels, Mat(), dstHist2, dims, &size, ranges);
 		double  count2 = 0;
 		for (int i = 0; i < 160; i++)
@@ -77,21 +77,20 @@ int main()
 		}
 		normalize(dstHist2, dstHist2, 0, 1, NORM_MINMAX, -1, Mat());
 
-		//¼ÆËãÁ½ÕÅÍ¼ÏñµÄÏà¹Ø¶È
+		//è®¡ç®—ä¸¤å¼ å›¾åƒçš„ç›¸å…³åº¦
 		double hi1_hi2 = compareHist(dstHist1, dstHist2, CV_COMP_INTERSECT);
 
 		//cout << "count = " << count << endl;
 		//cout << "dstHist1.rows * dstHist1.cols = " << hi1_clone.rows * hi1_clone.cols << endl;
 
 		double ratio1 = (count1 / (hi1_clone.rows * hi1_clone.cols)) * 100;
-		cout << imgName1 << ": " << "0-160»Ò¶ÈÖµÕ¼±ÈÎª = " << ratio1 << "%"<< endl;
+		cout << imgName1 << ": " << "0-160ç°åº¦å€¼å æ¯”ä¸º = " << ratio1 << "%"<< endl;
 
 		double ratio2 = (count2 / (hi2_clone.rows * hi2_clone.cols)) * 100;
-		cout << imgName2 << ": " << "0-160»Ò¶ÈÖµÕ¼±ÈÎª = " << ratio2 << "%" << endl;
+		cout << imgName2 << ": " << "0-160ç°åº¦å€¼å æ¯”ä¸º = " << ratio2 << "%" << endl;
 
-		cout << "¼ÆËãÖ±·½Í¼µÃÍ¼Æ¬1_Í¼Æ¬2Ïà¹Ø¶ÈÎª: = " << hi1_hi2 << endl;
-		//²âÊÔgit
-		cout << "ÊäÈëqÍË³ö£¬ÊäÈëÆäËû¼ÌĞø: ";
+		cout << "è®¡ç®—ç›´æ–¹å›¾å¾—å›¾ç‰‡1_å›¾ç‰‡2ç›¸å…³åº¦ä¸º: = " << hi1_hi2 << endl;
+		cout << "è¾“å…¥qé€€å‡ºï¼Œè¾“å…¥å…¶ä»–ç»§ç»­: ";
 		cin >> input;
 	}
 
