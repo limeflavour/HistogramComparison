@@ -17,8 +17,8 @@ int main()
 		cout << "第二张图片编号: ";
 		cin >> imgName2;
 		stringstream ss1, ss2;
-		ss1 << "C:\\数据\\东西湖区志（上卷）-RH\\visualized\\" << imgName1 << ".visualized.jpg";
-		ss2 << "C:\\数据\\东西湖区志（上卷）-RH\\visualized\\" << imgName2 << ".visualized.jpg";
+		ss1 << "D:\\市志数据\\东西湖区志（上卷）-RH\\visualized\\" << imgName1 << ".visualized.jpg";
+		ss2 << "D:\\市志数据\\东西湖区志（上卷）-RH\\visualized\\" << imgName2 << ".visualized.jpg";
 		cout << ss1.str() << endl << ss2.str() << endl;
 
 		Mat srcImage1 = imread(ss1.str(), 0);
@@ -90,7 +90,7 @@ int main()
 		cout << imgName2 << ": " << "0-160灰度值占比为 = " << ratio2 << "%" << endl;
 
 		cout << "计算直方图得图片1_图片2相关度为: = " << hi1_hi2 << endl;
-
+		//测试git
 		cout << "输入q退出，输入其他继续: ";
 		cin >> input;
 	}
